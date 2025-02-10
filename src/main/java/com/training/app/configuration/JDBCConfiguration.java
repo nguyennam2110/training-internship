@@ -12,8 +12,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class JDBCConfiguration {
+
   private JDBCConfiguration() {
   }
+
   public static Connection connection() {
     try {
       return DriverManager.getConnection(URL, USER_NAME, PASS_WORD);
@@ -43,6 +45,9 @@ public class JDBCConfiguration {
       createDatabaseStatement = connection.prepareStatement(createDatabaseSQL);
       useDatabaseStatement = connection.prepareStatement(useDatabaseSQL);
       createStudentStatement = connection.prepareStatement(createStudentTableSQL);
+      createDatabaseStatement.executeUpdate();
+      useDatabaseStatement.executeUpdate();
+      createStudentStatement.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
     } finally {

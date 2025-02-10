@@ -7,7 +7,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: training-internship
+      MYSQL_DATABASE: training_internship
       MYSQL_USER: admin
       MYSQL_PASSWORD: root
     ports:

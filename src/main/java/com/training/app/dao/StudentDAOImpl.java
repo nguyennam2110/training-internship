@@ -28,8 +28,9 @@ public class StudentDAOImpl implements StudentDAO {
       preparedStatement.setString(1, student.getName());
       preparedStatement.setInt(2, studentRequest.getGender().getCode());
       preparedStatement.setInt(3, student.getAge());
+      int result =  preparedStatement.executeUpdate();
       System.out.println("Student has been created successfully.");
-      return preparedStatement.executeUpdate();
+      return result;
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Error: " + e.getMessage());
