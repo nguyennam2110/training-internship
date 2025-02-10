@@ -30,6 +30,8 @@ public class JDBCConfiguration {
     PreparedStatement createStudentStatement = null;
     try {
       connection = connection();
+      String createDatabaseSQL = "CREATE DATABASE IF NOT EXISTS training_internship;";
+      String useDatabaseSQL = "USE training_internship;";
       String createStudentTableSQL = """
           CREATE TABLE IF NOT EXISTS Student (
               id INT PRIMARY KEY AUTO_INCREMENT,
@@ -38,11 +40,9 @@ public class JDBCConfiguration {
               age INT
           );
           """;
-      String createDatabaseSQL = "CREATE DATABASE IF NOT EXISTS training_internship;";
-      String useDatabaseSQL = "USE training_internship;";
       createDatabaseStatement = connection.prepareStatement(createDatabaseSQL);
       useDatabaseStatement = connection.prepareStatement(useDatabaseSQL);
-      createStudentStatement = connection.prepareStatement(createDatabaseSQL);
+      createStudentStatement = connection.prepareStatement(createStudentTableSQL);
     } catch (SQLException e) {
       e.printStackTrace();
     } finally {
