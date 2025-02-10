@@ -6,11 +6,13 @@ public class StudentDTO {
   private String name;
   private Gender gender;
   private int age;
+  private Integer roomId;
 
-  public StudentDTO(String name, Gender gender, int age) {
+  public StudentDTO(String name, Gender gender, int age, Integer roomId) {
     this.name = name;
     this.gender = gender;
     this.age = age;
+    this.roomId = roomId;
   }
 
   public String getName() {
@@ -36,4 +38,8 @@ public class StudentDTO {
   public void setAge(int age) {
     this.age = age;
   }
+
+  public Integer getRoomId() { return roomId; }
+
+  public void setRoomId(Integer roomId) { this.roomId = roomId; }
 }

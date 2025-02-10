@@ -11,6 +11,7 @@ public class StudentMapperImpl implements StudentMapper {
     student.setName(studentDTO.getName());
     student.setGender(studentDTO.getGender());
     student.setAge(studentDTO.getAge());
+    student.setRoomId(studentDTO.getRoomId());
     return student;
   }
 }
