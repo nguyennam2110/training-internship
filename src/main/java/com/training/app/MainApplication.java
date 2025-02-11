@@ -7,6 +7,8 @@ import com.training.app.dao.StudentDAO;
 import com.training.app.dao.StudentDAOImpl;
 import com.training.app.entity.dto.StudentDTO;
 import com.training.app.entity.enums.Gender;
+import com.training.app.entity.model.Student;
+
 import java.util.Scanner;
 
 public class MainApplication {
@@ -18,6 +20,7 @@ public class MainApplication {
     while (true) {
       System.out.println("Please choose an action:");
       System.out.println("1 - Create new student");
+      System.out.println("2 - Search for a student");
       System.out.println("0 - Exit");
 
       int selection = scanner.nextInt();
@@ -36,6 +39,19 @@ public class MainApplication {
           StudentDTO student = new StudentDTO(name, genderEnum, age);
           studentDAO.createStudent(student);
           break;
+
+        case 2:
+          System.out.print("Enter student name to search: ");
+          String searchName = scanner.nextLine();
+          Student foundStudent = studentDAO.searchStudent(new StudentDTO(searchName, null, 0));
+
+          if (foundStudent != null) {
+            System.out.println("Student found: " + foundStudent.getName() + ", Gender: " + foundStudent.getGender() + ", Age: " + foundStudent.getAge());
+          } else {
+            System.out.println("Student not found.");
+          }
+          break;1
+
         default:
           System.out.println("Goodbye!");
           return;
