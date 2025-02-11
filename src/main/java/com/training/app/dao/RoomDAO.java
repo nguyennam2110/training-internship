@@ -2,9 +2,9 @@ package com.training.app.dao;
 
 public interface RoomDAO {
 
-  void exportRoomsToExcel(String filePath);
+  void exportRoomsToExcel();
 
-  void exportRoomsAndStudentsToExcel(String filePath);
+  void exportRoomsAndStudentsToExcel();
 
-  boolean isroomExists(int roomId);
+  boolean isRoomExists(int roomId);
 }

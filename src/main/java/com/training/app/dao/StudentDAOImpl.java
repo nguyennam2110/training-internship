@@ -7,6 +7,7 @@ import com.training.app.entity.mapper.StudentMapper;
 import com.training.app.entity.mapper.StudentMapperImpl;
 import com.training.app.entity.model.Student;
 
+import com.training.app.utils.ExcelUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public class StudentDAOImpl implements StudentDAO {
@@ -58,41 +60,30 @@ public class StudentDAOImpl implements StudentDAO {
     return 0;
   }
 
-  public void exportStudentsToExcel(String filePath) {
+  @Override
+  public void exportStudentsToExcel() {
+    String filePath = "students.xlsx";
+
     try (Connection connection = connection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_STUDENTS);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        Workbook workbook = new XSSFWorkbook()) {
+         PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_STUDENTS);
+         ResultSet resultSet = preparedStatement.executeQuery();
+         Workbook workbook = new XSSFWorkbook()) {
 
       Sheet sheet = workbook.createSheet("Students");
-      String[] headers = {"ID", "Name", "Gender", "Age"};
+      ResultSetMetaData metaData = resultSet.getMetaData();
+      int columnCount = metaData.getColumnCount();
 
-      createHeaderRow(sheet, headers);
-
-      int rowIndex = 1;
-      while (resultSet.next()) {
-        Row row = sheet.createRow(rowIndex++);
-        row.createCell(0).setCellValue(resultSet.getInt("id"));
-        row.createCell(1).setCellValue(resultSet.getString("name"));
-        row.createCell(2).setCellValue(resultSet.getInt("gender") == 1 ? "Male" : "Female");
-        row.createCell(3).setCellValue(resultSet.getInt("age"));
-      }
+      ExcelUtils.createHeaderRow(sheet, metaData, columnCount);
+      ExcelUtils.writeDataRows(sheet, resultSet, columnCount);
 
       try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
         workbook.write(outputStream);
-        System.out.println("Student data has been exported to Excel successfully!");
+        System.out.println("Student data has been exported to students.xlsx successfully!");
       }
+
     } catch (IOException | SQLException e) {
       e.printStackTrace();
     }
-  }
-
-  private void createHeaderRow(Sheet sheet, String[] headers) {
-    Row headerRow = sheet.createRow(0);
-    for (int i = 0; i < headers.length; i++) {
-      headerRow.createCell(i).setCellValue(headers[i]);
-    }
-
   }
 
 }

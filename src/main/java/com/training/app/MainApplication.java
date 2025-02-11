@@ -45,7 +45,7 @@ public class MainApplication {
           if (roomId == -1) {
             roomId = null;
           } else {
-            if (!roomDAO.isroomExists(roomId)) {
+            if (!roomDAO.isRoomExists(roomId)) {
               System.out.println("Error: Room ID does not exist.");
               break;
             }
@@ -54,19 +54,13 @@ public class MainApplication {
           studentDAO.createStudent(student);
           break;
         case 2:
-          System.out.print("Enter file name (vd: students.xlsx): ");
-          String filePath = scanner.nextLine();
-          studentDAO.exportStudentsToExcel(filePath);
+          studentDAO.exportStudentsToExcel();
           break;
         case 3:
-          System.out.print("Enter file name (ex: rooms.xlsx): ");
-          String roomFilePath = scanner.nextLine();
-          roomDAO.exportRoomsToExcel(roomFilePath);
+          roomDAO.exportRoomsToExcel();
           break;
         case 4:
-          System.out.print("Enter file name (ex: Alldata.xlsx): ");
-          String combinedFilePath = scanner.nextLine();
-          roomDAO.exportRoomsAndStudentsToExcel(combinedFilePath);
+          roomDAO.exportRoomsAndStudentsToExcel();
           break;
         default:
           System.out.println("Goodbye!");

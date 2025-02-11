@@ -6,5 +6,5 @@ public interface StudentDAO {
 
   int createStudent(StudentDTO studentRequest);
 
-  void exportStudentsToExcel(String filePath);
+  void exportStudentsToExcel();
 }

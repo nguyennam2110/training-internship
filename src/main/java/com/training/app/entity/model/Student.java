@@ -8,17 +8,18 @@ public class Student {
   private String name;
   private Gender gender;
   private int age;
-  private Integer roomId;
+  private Room room;
+
 
   public Student() {
   }
 
-  public Student(Integer id, String name, Gender gender, int age, Integer roomId) {
+  public Student(Integer id, String name, Gender gender, int age, Room room) {
     this.id = id;
     this.name = name;
     this.gender = gender;
     this.age = age;
-    this.roomId = roomId;
+    this.room = room;
   }
 
   public Integer getId() {
@@ -53,11 +54,11 @@ public class Student {
     this.age = age;
   }
 
-  public Integer getRoomId() {
-    return roomId;
+  public Room getRoom() {
+    return room;
   }
 
-  public void setRoomId(Integer roomId) {
-    this.roomId = roomId;
+  public void setRoom(Room room) {
+    this.room = room;
   }
 }
