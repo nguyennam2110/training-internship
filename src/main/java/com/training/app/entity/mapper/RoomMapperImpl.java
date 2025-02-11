@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 
 public class RoomMapperImpl implements RoomMapper {
 
-    @Override
-    public Room toEntity(RoomDTO roomDTO) {
-        Room room = new Room();
-        room.setRoomName(roomDTO.getRoomName());
-        room.setRoomNumber(roomDTO.getRoomNumber());
-        return room;
-    }
+  @Override
+  public Room toEntity(RoomDTO roomDTO) {
+    Room room = new Room();
+    room.setRoomName(roomDTO.getRoomName());
+    room.setRoomNumber(roomDTO.getRoomNumber());
+    return room;
+  }
 }

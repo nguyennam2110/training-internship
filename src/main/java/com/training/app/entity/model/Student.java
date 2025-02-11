@@ -53,7 +53,11 @@ public class Student {
     this.age = age;
   }
 
-  public Integer getRoomId() { return roomId; }
+  public Integer getRoomId() {
+    return roomId;
+  }
 
-  public void setRoomId(Integer roomId) { this.roomId = roomId; }
+  public void setRoomId(Integer roomId) {
+    this.roomId = roomId;
+  }
 }

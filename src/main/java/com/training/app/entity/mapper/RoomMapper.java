@@ -5,6 +5,6 @@ import com.training.app.entity.model.Room;
 
 public interface RoomMapper {
 
-    Room toEntity(RoomDTO roomDTO);
+  Room toEntity(RoomDTO roomDTO);
 
 }

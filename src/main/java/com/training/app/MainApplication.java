@@ -45,7 +45,7 @@ public class MainApplication {
           if (roomId == -1) {
             roomId = null;
           } else {
-            if (!roomDAO.roomExists(roomId)) {
+            if (!roomDAO.isroomExists(roomId)) {
               System.out.println("Error: Room ID does not exist.");
               break;
             }

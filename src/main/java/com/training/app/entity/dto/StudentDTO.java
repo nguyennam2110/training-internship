@@ -3,6 +3,7 @@ package com.training.app.entity.dto;
 import com.training.app.entity.enums.Gender;
 
 public class StudentDTO {
+
   private String name;
   private Gender gender;
   private int age;
@@ -39,7 +40,11 @@ public class StudentDTO {
     this.age = age;
   }
 
-  public Integer getRoomId() { return roomId; }
+  public Integer getRoomId() {
+    return roomId;
+  }
 
-  public void setRoomId(Integer roomId) { this.roomId = roomId; }
+  public void setRoomId(Integer roomId) {
+    this.roomId = roomId;
+  }
 }

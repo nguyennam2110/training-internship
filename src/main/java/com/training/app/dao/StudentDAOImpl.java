@@ -37,7 +37,7 @@ public class StudentDAOImpl implements StudentDAO {
       preparedStatement.setInt(2, studentRequest.getGender().getCode());
       preparedStatement.setInt(3, student.getAge());
       preparedStatement.setObject(4, studentRequest.getRoomId(), java.sql.Types.INTEGER);
-      int result =  preparedStatement.executeUpdate();
+      int result = preparedStatement.executeUpdate();
       System.out.println("Student has been created successfully.");
       return result;
     } catch (Exception e) {
@@ -60,17 +60,14 @@ public class StudentDAOImpl implements StudentDAO {
 
   public void exportStudentsToExcel(String filePath) {
     try (Connection connection = connection();
-         PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_STUDENTS);
-         ResultSet resultSet = preparedStatement.executeQuery();
-         Workbook workbook = new XSSFWorkbook()) {
+        PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_STUDENTS);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        Workbook workbook = new XSSFWorkbook()) {
 
       Sheet sheet = workbook.createSheet("Students");
+      String[] headers = {"ID", "Name", "Gender", "Age"};
 
-      Row headerRow = sheet.createRow(0);
-      headerRow.createCell(0).setCellValue("ID");
-      headerRow.createCell(1).setCellValue("Name");
-      headerRow.createCell(2).setCellValue("Gender");
-      headerRow.createCell(3).setCellValue("Age");
+      createHeaderRow(sheet, headers);
 
       int rowIndex = 1;
       while (resultSet.next()) {
@@ -85,12 +82,17 @@ public class StudentDAOImpl implements StudentDAO {
         workbook.write(outputStream);
         System.out.println("Student data has been exported to Excel successfully!");
       }
-
-    } catch (IOException e) {
-      System.err.println("Error writing Excel file: " + e.getMessage());
-    } catch (SQLException e) {
-      System.err.println("SQL Error: " + e.getMessage());
+    } catch (IOException | SQLException e) {
+      e.printStackTrace();
     }
+  }
+
+  private void createHeaderRow(Sheet sheet, String[] headers) {
+    Row headerRow = sheet.createRow(0);
+    for (int i = 0; i < headers.length; i++) {
+      headerRow.createCell(i).setCellValue(headers[i]);
+    }
+
   }
 
 }
