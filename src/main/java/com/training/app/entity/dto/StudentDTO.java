@@ -6,7 +6,6 @@ public class StudentDTO {
   private String name;
   private Gender gender;
   private int age;
-
   public StudentDTO(String name, Gender gender, int age) {
     this.name = name;
     this.gender = gender;
