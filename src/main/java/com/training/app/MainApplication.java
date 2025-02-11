@@ -5,9 +5,16 @@ import static com.training.app.entity.enums.Gender.convertToValue;
 
 import com.training.app.dao.StudentDAO;
 import com.training.app.dao.StudentDAOImpl;
+import com.training.app.entity.dto.RoomDTO;
 import com.training.app.entity.dto.StudentDTO;
 import com.training.app.entity.enums.Gender;
+import com.training.app.entity.model.Room;
+
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
 
 public class MainApplication {
 
@@ -42,4 +49,22 @@ public class MainApplication {
       }
     }
   }
+
+  public void updateRoom(Integer Id, String name, int number) {
+    Room room = new Room();
+    room.setId(Id);
+    room.setName(name);
+    room.setNumber(number);
+
+    System.out.println("Updated Room Information:");
+    System.out.println("ID: " + room.getId());
+    System.out.println("Name: " + room.getName());
+    System.out.println("Number: " + room.getNumber());
+  }
+
+  public void showRoom(RoomDTO room) {
+    System.out.println("Room Information:");
+    System.out.println("ID: " + room.getId() + ", Name: " + room.getName() + ", Number: " + room.getNumber());
+  }
+
 }
